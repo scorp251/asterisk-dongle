@@ -1,0 +1,1 @@
+* * * * * /usr/scripts/restartmodem.sh >> /var/log/restartmodem.log 2>&1
