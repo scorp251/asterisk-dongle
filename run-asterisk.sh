@@ -20,6 +20,9 @@ docker run --detach --restart always --name asterisk-dongle --hostname asterisk-
     --device=/dev/ttyUSB6 \
     --device=/dev/ttyUSB7 \
     --device=/dev/ttyUSB8 \
+    --device=/dev/ttyUSB9 \
+    --device=/dev/ttyUSB10 \
+    --device=/dev/ttyUSB11 \
     -p 5060:5060/udp \
     -p 5060:5060/tcp \
     asterisk-dongle
