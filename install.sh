@@ -53,7 +53,16 @@ mkdir -p $INSTALLDIR
 WORKDIR=$( cd $( dirname "${BASH_SOURCE[0]}" ) >/dev/null && pwd )
 
 cd $WORKDIR/docker
-docker build -t asterisk-dongle --force-rm .
+
+IMAGENUM=`/usr/bin/docker images | grep asterisk-dongle | wc -l`
+if [ $IMAGENUM -gt 0 ]; then
+    read -p "Image asterisk-dongle exists. Would you like to build new image? y/N: " ANSWER
+    if [ "$ANSWER" == "y" ]; then
+        docker build -t asterisk-dongle --force-rm .
+    fi
+else
+    docker build -t asterisk-dongle --force-rm .
+fi
 
 cp -rf $WORKDIR/asterisk-config $INSTALLDIR/
 cp -f $WORKDIR/run-asterisk.sh $INSTALLDIR/
