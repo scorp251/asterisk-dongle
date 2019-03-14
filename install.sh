@@ -1,6 +1,7 @@
 #!/bin/bash
 
 INSTALLDIR=/opt/asterisk-dongle
+NUM_MODEM=1
 
 runOnMac=false
 int2ip() { printf ${2+-v} $2 "%d.%d.%d.%d" \
@@ -68,4 +69,9 @@ cp -rf $WORKDIR/asterisk-config $INSTALLDIR/
 cp -f $WORKDIR/run-asterisk.sh $INSTALLDIR/
 sed -i 's/externaddr.*/externaddr='$LOCALIP'/' $INSTALLDIR/asterisk-config/sip.conf
 
-$INSTALLDIR/run-asterisk.sh
+read -p "Number of GSM modems for first run [Default $NUM_MODEM]:" ANSWER
+if [ "$ANSWER" != "" ];then
+    $INSTALLDIR/run-asterisk.sh $ANSWER
+else
+    $INSTALLDIR/run-asterisk.sh $NUM_MODEM
+fi
